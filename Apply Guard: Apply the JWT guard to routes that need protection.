@@ -1,0 +1,13 @@
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './jwt-auth.guard';
+
+@Controller('users')
+export class UsersController {
+  // other methods
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async findOne(@Param('id') id: number): Promise<User> {
+    return this.usersService.findOne(id);
+  }
+}
